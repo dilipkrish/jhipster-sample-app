@@ -1,7 +1,6 @@
 package com.mycompany.myapp.config.apidoc;
 
 import com.mycompany.myapp.config.Constants;
-import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
@@ -15,20 +14,23 @@ import org.springframework.util.StopWatch;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import static springfox.documentation.builders.PathSelectors.regex;
+import java.util.Date;
+
+import static springfox.documentation.builders.PathSelectors.*;
 
 /**
  * Springfox Swagger configuration.
- *
+ * <p/>
  * Warning! When having a lot of REST endpoints, Springfox can become a performance issue. In that
  * case, you can use a specific Spring profile for this class, so that only front-end developers
  * have access to the Swagger view.
  */
 @Configuration
 @EnableSwagger2
-@Profile("!"+Constants.SPRING_PROFILE_PRODUCTION)
+@Profile("!" + Constants.SPRING_PROFILE_PRODUCTION)
 public class SwaggerConfiguration implements EnvironmentAware {
 
     private final Logger log = LoggerFactory.getLogger(SwaggerConfiguration.class);
@@ -81,5 +83,10 @@ public class SwaggerConfiguration implements EnvironmentAware {
             propertyResolver.getProperty("contact"),
             propertyResolver.getProperty("license"),
             propertyResolver.getProperty("licenseUrl"));
+    }
+
+    @Bean
+    public SecurityConfiguration securityConfiguration() {
+        return new SecurityConfiguration("123", "abc", "test", "123456");
     }
 }

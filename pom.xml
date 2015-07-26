@@ -47,7 +47,7 @@
         <run.addResources>false</run.addResources>
         <sonar-maven-plugin.version>2.3</sonar-maven-plugin.version>
         <spring-security.version>4.0.1.RELEASE</spring-security.version>
-        <springfox.version>2.0.3</springfox.version>
+        <springfox.version>2.1.2</springfox.version>
         <usertype-core.version>4.0.0.GA</usertype-core.version>
     </properties>
 
